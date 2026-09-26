@@ -1,3 +1,3 @@
 export const App = () => {
-    return (<h1>Hello React Performance Lab</h1>);
+    return (<h1>Webpack Dev Server Works</h1>);
 }
