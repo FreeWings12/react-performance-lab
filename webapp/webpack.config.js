@@ -1,15 +1,15 @@
-const { resolve } = require('dns');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const mode = 'development';
+const isDevEnv = true;
+const mode =  isDevEnv ? 'development' : 'production';
 
 module.exports = {
     entry: './src/main.tsx',
     mode,
+    devtool: 'source-map',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle[contenthash].js'
     },
     module: {
         rules: [
