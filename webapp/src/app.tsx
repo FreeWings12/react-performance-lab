@@ -1,15 +1,22 @@
-import { useState, type FunctionComponent } from 'react';
+import { lazy, Suspense, useState, type FunctionComponent } from 'react';
+
+const CustomerDetails = lazy(() => import('./CustomerDetails'));
+
+// import { customerDetailsProps } from './CustomerDetails';
 export const App = () => {
-    const [CustomerDetailsComponent, setCustomerDetails] = useState<null | FunctionComponent>(null);
+    const [showCustomerDetails, setCustomerDetails] = useState(false);
     const handleCustomerDetails = async () => {
         console.log("handleCustomerDetails clicked");
-        const { CustomerDetails } = await import('./CustomerDetails');
-        setCustomerDetails(CustomerDetails);
+        setCustomerDetails(true);
     }
     return (
         <div>
             <h1>Hello React Performance Lab!</h1>
-            {CustomerDetailsComponent !== null && <CustomerDetailsComponent />}
+            {showCustomerDetails && (
+                <Suspense fallback={<p>Loading Customer Details...</p>}>
+                    <CustomerDetails customerId='123' />
+                </Suspense>
+            )}
             <button onClick={handleCustomerDetails}>View Customer Details</button>
         </div>
     );
