@@ -1,4 +1,5 @@
 import { lazy, Suspense, useState, type FunctionComponent } from 'react';
+import { CustomerDetailsErrorBoundary } from './CustomerDetailsErrorBoundary';
 
 const CustomerDetails = lazy(() => import('./CustomerDetails'));
 
@@ -10,14 +11,16 @@ export const App = () => {
         setCustomerDetails(true);
     }
     return (
-        <div>
-            <h1>Hello React Performance Lab!</h1>
-            {showCustomerDetails && (
-                <Suspense fallback={<p>Loading Customer Details...</p>}>
-                    <CustomerDetails customerId='123' />
-                </Suspense>
-            )}
-            <button onClick={handleCustomerDetails}>View Customer Details</button>
-        </div>
+        <CustomerDetailsErrorBoundary>
+            <div>
+                <h1>Hello React Performance Lab!</h1>
+                {showCustomerDetails && (
+                    <Suspense fallback={<p>Loading Customer Details...</p>}>
+                        <CustomerDetails customerId='123' />
+                    </Suspense>
+                )}
+                <button onClick={handleCustomerDetails}>View Customer Details</button>
+            </div>
+        </CustomerDetailsErrorBoundary>
     );
 }
