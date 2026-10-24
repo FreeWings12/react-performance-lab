@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, type FunctionComponent } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { CustomerDetailsErrorBoundary } from './CustomerDetailsErrorBoundary';
 
 const CustomerDetails = lazy(() => import('./CustomerDetails'));
@@ -7,7 +7,6 @@ const CustomerDetails = lazy(() => import('./CustomerDetails'));
 export const App = () => {
     const [showCustomerDetails, setCustomerDetails] = useState(false);
     const handleCustomerDetails = async () => {
-        console.log("handleCustomerDetails clicked");
         setCustomerDetails(true);
     }
     return (
